@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendation System</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🎬 Movie Recommendation System</h1>
+        <p class="subtitle">
+            Find movies and TV shows similar to your favourites.
+        </p>
+
+        <form method="POST">
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    name="movie"
+                    placeholder="Enter a Movie or TV Show..."
+                    required>
+
+                <button type="submit">
+                    Recommend
+                </button>
+
+            </div>
+
+        </form>
+
+        {% if recommendations %}
+
+        <h2>Recommended Titles</h2>
+
+        <div class="recommendations">
+
+            {% for movie in recommendations %}
+
+            <div class="card">
+
+                <h3>{{ movie["Title"] }}</h3>
+
+                <p><strong>Type:</strong> {{ movie["Type"] }}</p>
+
+                <p><strong>Genre:</strong> {{ movie["Genre"] }}</p>
+
+                <p><strong>Director:</strong> {{ movie["Director"] or "N/A" }}</p>
+
+                <p><strong>Release Year:</strong> {{ movie["Release Year"] }}</p>
+
+                <p><strong>Rating:</strong> {{ movie["Rating"] }}</p>
+
+                <p class="description"><strong>Description:</strong> 
+                    {{ movie["Description"] }}
+                </p>
+
+                <div class="similarity">
+                    Similarity: {{ "%.2f"|format(movie["Similarity"]) }}%
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
