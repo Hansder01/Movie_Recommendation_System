@@ -1,0 +1,18 @@
+#venv
+venv
+
+#data
+data
+
+#cache
+C:\Users\Sayan Chowdhury\Desktop\Movie_Recommendation_System\__pycache__
+
+#models
+models
+
+#databuilder
+imdb_downloader.py
+imdb_parser.py
+merge_parser.py
+tmdb_parser.py
+test.py
