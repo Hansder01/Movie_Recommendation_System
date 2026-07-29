@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Movie Recommendation System{% endblock %}</title>
+    
+    <!-- Google Fonts for Modern Look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+    <!-- Dynamic Background Elements -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+
+    <!-- Header / Navbar -->
+    <nav class="navbar glass-panel">
+        <div class="nav-container">
+            <a href="/" class="brand glow-text">🎬 CineMatch</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="content-wrap">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer glass-panel">
+        <div class="footer-content">
+            <p>&copy; 2026 CineMatch. Powered by Cosmic Glass & SentenceTransformers.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

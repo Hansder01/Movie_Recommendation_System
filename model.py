@@ -97,7 +97,7 @@ class MovieRecommender:
             ]
 
             if matches.empty:
-                return []
+                return None, []
 
             idx = matches.index[0]
 
@@ -195,7 +195,20 @@ class MovieRecommender:
 
             })
 
+        source_movie = {
+            "Title": source["title"],
+            "Genre": source["listed_in"],
+            "Director": source["director"],
+            "Cast": source["cast"],
+            "Country": source["country"],
+            "Rating": source["rating"],
+            "Type": source["type"],
+            "Release Year": int(source_year) if pd.notna(source_year) else None,
+            "Description": source["description"],
+        }
+
         return (
+            source_movie,
             pd.DataFrame(recommendations)
             .drop_duplicates("Title")
             .sort_values(

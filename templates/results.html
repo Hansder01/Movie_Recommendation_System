@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Results - CineMatch{% endblock %}
+
+{% block content %}
+<div class="container glass-panel">
+    
+    <a href="/" class="back-btn">&larr; Back to Search</a>
+
+    {% if source_movie %}
+    <div class="source-movie-section">
+        <h2 class="section-title">You Searched For:</h2>
+        <div class="source-card">
+            <h2>{{ source_movie["Title"] }}</h2>
+            
+            <div class="tags">
+                <span class="tag type-tag">{{ source_movie["Type"] }}</span>
+                <span class="tag year-tag">{{ source_movie["Release Year"] }}</span>
+                <span class="tag rating-tag">{{ source_movie["Rating"] }}</span>
+            </div>
+            
+            <p class="genre-text"><strong>Genre:</strong> {{ source_movie["Genre"] }}</p>
+            <p class="director-text"><strong>Director:</strong> {{ source_movie["Director"] or "N/A" }}</p>
+            
+            <div class="divider"></div>
+            
+            <p class="description" style="-webkit-line-clamp: unset;">
+                {{ source_movie["Description"] }}
+            </p>
+        </div>
+    </div>
+    
+    <div class="results-container">
+        <h2 class="section-title">Because you liked {{ source_movie["Title"] }}...</h2>
+
+        <div class="recommendations">
+            {% for movie in recommendations %}
+            <a href="{{ url_for('home', movie=movie['Title']) }}" style="text-decoration: none; color: inherit; display: block; outline: none;">
+                <div class="card glass-card">
+                    <div class="card-header">
+                        <h3>{{ movie["Title"] }}</h3>
+                        <span class="similarity-badge">{{ "%.1f"|format(movie["Similarity"]) }}% Match</span>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="tags">
+                            <span class="tag type-tag">{{ movie["Type"] }}</span>
+                            <span class="tag year-tag">{{ movie["Release Year"] }}</span>
+                            <span class="tag rating-tag">{{ movie["Rating"] }}</span>
+                        </div>
+                        
+                        <p class="genre-text"><strong>Genre:</strong> {{ movie["Genre"] }}</p>
+                        <p class="director-text"><strong>Director:</strong> {{ movie["Director"] or "N/A" }}</p>
+                        
+                        <div class="divider"></div>
+                        
+                        <p class="description">
+                            {{ movie["Description"] }}
+                        </p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    
+    <div class="results-container" style="text-align: center;">
+        <h2 class="section-title">Movie Not Found</h2>
+        <p style="color: var(--text-muted); font-size: 18px;">
+            Sorry, we couldn't find a match for "{{ searched_query }}".
+        </p>
+    </div>
+    
+    {% endif %}
+
+</div>
+{% endblock %}
