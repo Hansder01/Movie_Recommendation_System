@@ -4,8 +4,6 @@
 
 {% block content %}
 <div class="container glass-panel">
-    
-    <a href="/" class="back-btn">&larr; Back to Search</a>
 
     {% if source_movie %}
     <div class="source-movie-section">
@@ -66,9 +64,9 @@
     {% else %}
     
     <div class="results-container" style="text-align: center;">
-        <h2 class="section-title">Movie Not Found</h2>
+        <h2 class="section-title">Not Found</h2>
         <p style="color: var(--text-muted); font-size: 18px;">
-            Sorry, we couldn't find a match for "{{ searched_query }}".
+            "{{ searched_query }}" has not been adapted yet.
         </p>
     </div>
     
