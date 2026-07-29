@@ -5,77 +5,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Recommendation System</title>
-
+    
+    <!-- Google Fonts for Modern Look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
-    <div class="container">
+    <!-- Dynamic Background Elements -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
 
-        <h1>🎬 Movie Recommendation System</h1>
+    <div class="container glass-panel">
+
+        <h1 class="glow-text">🎬 Movie Recommendation System</h1>
         <p class="subtitle">
-            Find movies and TV shows similar to your favourites.
+            Find movies and TV shows similar to your favourites in a stunning cosmic universe.
         </p>
 
         <form method="POST">
-
             <div class="search-box">
-
-                <input
-                    type="text"
-                    name="movie"
-                    placeholder="Enter a Movie or TV Show..."
-                    required>
-
-                <button type="submit">
+                <div class="input-wrapper">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input
+                        type="text"
+                        name="movie"
+                        placeholder="Enter a Movie or TV Show..."
+                        required>
+                </div>
+                <button type="submit" class="btn-glow">
                     Recommend
                 </button>
-
             </div>
-
         </form>
 
         {% if recommendations %}
+        <div class="results-container">
+            <h2 class="section-title">Recommended Titles</h2>
 
-        <h2>Recommended Titles</h2>
+            <div class="recommendations">
+                {% for movie in recommendations %}
+                <div class="card glass-card">
+                    <div class="card-header">
+                        <h3>{{ movie["Title"] }}</h3>
+                        <span class="similarity-badge">{{ "%.1f"|format(movie["Similarity"]) }}% Match</span>
+                    </div>
 
-        <div class="recommendations">
-
-            {% for movie in recommendations %}
-
-            <div class="card">
-
-                <h3>{{ movie["Title"] }}</h3>
-
-                <p><strong>Type:</strong> {{ movie["Type"] }}</p>
-
-                <p><strong>Genre:</strong> {{ movie["Genre"] }}</p>
-
-                <p><strong>Director:</strong> {{ movie["Director"] or "N/A" }}</p>
-
-                <p><strong>Release Year:</strong> {{ movie["Release Year"] }}</p>
-
-                <p><strong>Rating:</strong> {{ movie["Rating"] }}</p>
-
-                <p class="description"><strong>Description:</strong> 
-                    {{ movie["Description"] }}
-                </p>
-
-                <div class="similarity">
-                    Similarity: {{ "%.2f"|format(movie["Similarity"]) }}%
+                    <div class="card-body">
+                        <div class="tags">
+                            <span class="tag type-tag">{{ movie["Type"] }}</span>
+                            <span class="tag year-tag">{{ movie["Release Year"] }}</span>
+                            <span class="tag rating-tag">{{ movie["Rating"] }}</span>
+                        </div>
+                        
+                        <p class="genre-text"><strong>Genre:</strong> {{ movie["Genre"] }}</p>
+                        <p class="director-text"><strong>Director:</strong> {{ movie["Director"] or "N/A" }}</p>
+                        
+                        <div class="divider"></div>
+                        
+                        <p class="description">
+                            {{ movie["Description"] }}
+                        </p>
+                    </div>
                 </div>
-
+                {% endfor %}
             </div>
-
-            {% endfor %}
-
         </div>
-
         {% endif %}
 
     </div>
 
 </body>
-
 </html>

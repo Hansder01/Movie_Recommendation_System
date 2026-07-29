@@ -10,6 +10,9 @@ C:\Users\Sayan Chowdhury\Desktop\Movie_Recommendation_System\__pycache__
 #models
 models
 
+#cache
+__pycache__
+
 #databuilder
 imdb_downloader.py
 imdb_parser.py

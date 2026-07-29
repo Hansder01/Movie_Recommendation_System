@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent
 ######################################################
 
 DATASET_OLD = BASE_DIR / "data" / "movies_dataset.parquet"
-DATASET = BASE_DIR / "data" / "movies_dataset_new.parquet"
+DATASET = BASE_DIR / "data" / "netflix_titles.csv"
 
 ######################################################
 # Models

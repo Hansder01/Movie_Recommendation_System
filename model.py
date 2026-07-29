@@ -24,9 +24,9 @@ class MovieRecommender:
 
         print("Loading Dataset...")
 
-        self.data = pd.read_parquet(
+        self.data = pd.read_csv(
             DATASET,
-            columns=[
+            usecols=[
                 "title",
                 "listed_in",
                 "cast",
